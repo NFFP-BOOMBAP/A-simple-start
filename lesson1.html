@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>我的第一课</title>
+    <style>
+        /* body */
+        body {
+            background-color: #0f0f1a;
+            font-family: arial, sans-serif;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #14f195;
+            font-size: 36px;
+            margin-bottom:10px; /* 下方留出10像素*/
+        }
+
+        h2 {
+            color: #9945FF;
+            font-size: 28px;
+            margin-top:30px;/*上方留出30像素，与前面内容拉开距离*/
+            margin-bottom:15px;
+        }
+
+        p {
+            color: #cccccc;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-top:5px;
+            margin-bottom:15px
+        }
+
+        button {
+            background-color: #14F195;
+            color: black;
+            /* 3像素粗、紫色、实线*/
+            border: 3px solid #9945FF;
+            /*内边距：上下12px，左右24px （内容与边框的距离）*/
+            padding: 12px 24px;
+
+            font-size: 16px;
+            border-radius: 30px;  /*圆角变大，变成胶囊形状*/
+            cursor: pointer;
+
+            /*外边距： 上方留20px空白，右侧留10px空白*/
+            margin-top:20px;
+                margin-right:10px;
+        }
+
+        button:hover {
+            background-color: #00cc7a;
+        }
+        .card{background-color:#1a1a2e;/*比背景稍亮的深色*/
+        padding:20px;/*卡片内部四周留白20像素*/
+    border-radius:16px;/*圆角*/
+border:1px solid #333;/*细细的灰色边框*/
+margin-top:30px;/*卡片上方留30像素*/}
+.card h2{margin-top:0;/*去掉卡片内标题的上边框，让它紧贴顶部*/}
+.card p{margin-bottom:0;/*去掉卡片内段落的下边距，让底部留白均匀*/}
+    </style>
+</head>
+
+<body>
+    <h1>欢迎来到 web3 世界</h1>
+    <p>我叫 刘景杭 </p>
+    <p>今天是 2026年4月14日 我开始学习编程了</p>
+    <button>这是一个按钮，点了没反应</button>
+    <div class="card">
+    <h2>我的目标</h2>
+    <p>三年后成为Solana合约工程师</p>
+    </div>
+</body>
+
+</html>
