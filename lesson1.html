@@ -9,6 +9,9 @@
             background-color: #0f0f1a;
             font-family: arial, sans-serif;
             padding: 40px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
         }
 
         h1 {
@@ -78,22 +81,84 @@
             margin-bottom: 0;
             /*去掉卡片内段落的下边距，让底部留白均匀*/
         }
-        .intro-card{background-color: #9945FF;
-        padding:20px}
+
+        .intro-card {
+            background-color: #9945FF;
+            padding: 20px;
+            width:fit-content; /*新增：宽度由内容决定*/;
+        }
+
+        .button-group {
+            display: flex;
+            /*开启 flexbpx*/
+            gap: 20px;
+            /*按钮之间的间隙*/
+            margin-top: 20px;
+            justify-content: flex-start;
+            /*默认，靠左*/
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            /*水平居中*/
+            align-items: center;
+            /*垂直居中*/
+            height: 400px;
+            /*必须给高度，垂直居中才生效*/
+            margin-top: 40px;
+            background-color: #0a0a15;
+            border-radius: 20px;
+        }
+
+        .wallet-card {
+            background-color: #1a1a2e;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+
+        .wallet-card h2 {
+            margin-top: 0;
+            color: #14f195;
+        }
+
+        .wallet-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
     <div class="intro-card">
-    <h1>欢迎来到 web3 世界</h1>
-    <p>我叫 刘景杭 </p>
-    <p>今天是 2026年4月14日 我开始学习编程了</p>
+        <h1>欢迎来到 web3 世界</h1>
+        <p>我叫 刘景杭 </p>
+        <p>今天是 2026年4月14日 我开始学习编程了</p>
     </div>
-    <button>这是一个按钮，点了没反应</button>
+    <div class="button-group">
+        <button>这是一个按钮，点了没反应</button>
+        <button>这是第二个按钮</button>
+    </div>
     <div class="card">
         <h2>我的目标</h2>
         <p>三年后成为Solana合约工程师</p>
     </div>
+    <div class="flex-center">
+        <div class="wallet-card">
+            <h2>🔑 连接钱包 </h2>
+            <p>请选择你的钱包</p>
+            <div class="wallet-buttons">
+                <button>phantom</button>
+                <button>backpack</button>
+                <button>solflare</button>
+                <button>廖勇</button>
+            </div>
+        </div>
+    </div>
 </body>
 
-</html>
+</html
