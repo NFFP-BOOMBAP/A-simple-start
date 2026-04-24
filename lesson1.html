@@ -9,9 +9,9 @@
             background-color: #0f0f1a;
             font-family: arial, sans-serif;
             padding: 40px;
-            display:flex;
-            flex-direction:column;
-            align-items:center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
@@ -85,7 +85,9 @@
         .intro-card {
             background-color: #9945FF;
             padding: 20px;
-            width:fit-content; /*新增：宽度由内容决定*/;
+            width: fit-content;
+            /*新增：宽度由内容决定*/
+            ;
         }
 
         .button-group {
@@ -130,6 +132,7 @@
             justify-content: center;
             margin-top: 20px;
         }
+
         .ph-card {
             background-color: #1a1a2e;
             padding: 30px;
@@ -152,15 +155,15 @@
         <button>这是第二个按钮</button>
     </div>
     <div class="card">
-        <h2>我的目标</h2>
         <p>三年后成为Solana合约工程师</p>
     </div>
     <div class="flex-center">
         <div class="wallet-card">
             <h2>🔑 连接钱包 </h2>
+            <p>钱包地址：<span id="walletDisplay">未连接</span></p>
             <p>请选择你的钱包</p>
             <div class="wallet-buttons">
-                <button onclick="connectPhantom()">phantom</button>
+                <button onclick="connectPhantom();updateWalletDisplay()">phantom</button>
                 <button onclick="connectBackpack()">backpack</button>
                 <button>solflare</button>
                 <button>廖勇</button>
@@ -172,14 +175,18 @@
         <p>请你摁下您的右指</p>
         <button onclick="changebg()">切换背景颜色</button>
 
-    <script>
-        function sayhello() {alert('你好，现在的你。我是来自未来的你:Solana 合约工程师');}
-        function connectPhantom(){alert('Phantom 钱包已连接 （模拟）');}
-        function connectBackpack(){alert('你已在质押bp的协议中');}
-        function changebg(){document.body.style.backgroundColor='red';}
-        // 这里是 javascript 代码的领地
-        // 双斜杠开头的是注释，不会被电脑执行，用来给自己做笔记
+        <script>
+            function sayhello() { alert('你好，现在的你。我是来自未来的你:Solana 合约工程师'); }
+            function connectPhantom() { alert('Phantom 钱包已连接 （模拟）'); }
+            function connectBackpack() { alert('你已在质押bp的协议中'); }
+            var isRed=false;//放在函数里面，记住当前是不是红色
+            function changebg(){if(isRed){document.body.style.backgroundColor='#0f0f1a';//改回深色
+            isRed=false;}else{document.body.style.backgroundColor='red';//改成红色
+            isRed=true;}}
+            function updateWalletDisplay(){let fakeAddress='0x1234...abcd';//模拟我的Solana地址//通过id找到span元素，修改它的文字内容
+            document.getElementById('walletDisplay').innerText=fakeAddress;}
+            
         </script>
 </body>
 
-</html
+</html>
