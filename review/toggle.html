@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>javascript toggle</title>
+        <style>
+            .card{
+                background-color:burlywood;
+                width:400px;
+                height:400px;
+                border:3px solid black;
+                border-radius:20px;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                
+
+               
+
+            }
+            button{
+                width: 200px;
+                height:200px;
+                background-color:white;
+                border-radius:50%;
+                
+               
+                
+            }
+            body{
+                background-color:grey;
+            }
+
+            </style>
+            <body>
+                <h1>javascript toggle</h1>
+                <p>当前状态:<span id="status">离线</span></p>
+                <div class="card">
+                <button onclick="www()"><span id="zzz">账号:下线</span></button>
+                </div>
+                </body>
+                <script>
+                    let change=false;
+                    function www(){
+                        if(change){
+                            document.body.style.backgroundColor='grey';
+                            document.getElementById('status').innerText='离线';
+                            document.getElementById('zzz').innerText='账号:下线';
+                            change=false;
+                        }
+                        else{
+                                document.getElementById('status').innerText='在线';
+                                document.getElementById('zzz').innerText='账号:上线';
+                            document.body.style.backgroundColor='green';
+                            change=true;
+                        }
+                    }
+                    </script>
+
+    </head>
+    </html>
