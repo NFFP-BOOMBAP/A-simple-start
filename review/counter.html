@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>counter</title>
+        <style>
+            body{
+                background-color: grey ;
+                
+            }
+            .card{
+                background-color:aqua;
+                width:300px;
+                height:50px;
+                border-radius:20px;
+                border:5px solid black;
+                display:flex;
+                justify-content:center;
+                align-items:center; 
+                gap:20px;
+
+            }
+            </style>
+        </head>
+        <body>
+            <h1>counter</h1>
+            <p>当前计数：<span id="countDisplay">0</span></p>
+            <div class="card">
+            <button onclick="addone()">+1</button>
+            <button onclick="minusone()">-1</button>
+            <button onclick="resetcount()">重置</button>
+            </div>
+            </body>
+            <script>
+                let count = 0; //初始化计数器为0//
+                function addone(){
+                    count = count+1;//count自身+1//
+                    updateDisplay();
+                }
+                function minusone(){
+                    if(count>0){
+                        count=count-1;
+                        updateDisplay();
+                    }
+                }
+                function resetcount(){
+                    count=0;
+                    updateDisplay();
+                }
+                function updateDisplay(){
+                    //获取显示元素//
+                    let display=document.getElementById('countDisplay');
+                    display.innerText=count;
+                    //修改文字//
+                    if(count>10){
+                        document.body.style.backgroundColor='green';
+                    }else if (count<0){
+                        document.body.style.backgroundColor='red';
+                        //虽然阻止了负数，但保留着防御//
+                        setTimeout(() =>{
+                            document.body.style.backgroundColor='grey'
+                        },300);
+                    }else{
+                        document.body.style.backgroundColor='grey';
+                        //默认白色//
+                    }
+                    }
+
+                
+
+                </script>
+
+</html>
