@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>第八课：对象与数组</title>
+        <style>
+            body{
+                background-color:#0f0f1a;
+                font-family:Arial, sans-serif;
+                padding:40px;
+                color:white;
+            }
+            .wallte-btn{
+                background-color:#14F195;
+                color:black;
+                border:none;
+                padding:12px 24px;
+                border-radius:30px;
+                font-size:16px;
+                cursor:pointer;
+                margin:5px;
+            }
+            #walletContainer{
+                margin-top: 20px;
+            }
+            </style>
+        </head>
+        <body>
+            <h1>选择你的钱包</h1>
+            <div id="walletContainer"></div>
+            <script>
+                //  数组+对象：钱包列表
+                let walletList=[
+                    {name:'Phantom',color:'#9945FF'},
+                    {name:'Backpack',color:'#14F195'},
+                    {name:'Solflare',color:'FF6B6B'},
+                    {name:'Ledger',color:'FFD700'}
+                ];
+                //获取容器
+                let container=document.getElementById('walletContainer');
+                //遍历数组，给每个钱吧生成一个按钮
+                for (let i = 0 ; i < walletList.length; i++){
+                    let wallet=walletList[i]
+                    //获取当前钱包对象
+                    //创建按钮元素
+                    let btn = document.createElement('button');
+                    btn.className='wallet-btn';
+                    btn.style.backgroundColor=wallet.color;
+                    btn.innerText=wallet.name;
+                    //绑定点击事件
+                    btn.onclick=function(){
+                        alert('你选择了'+wallet.name+'钱包');
+                    };
+                    //把按钮添加到容器里
+                    container.appendChild(btn);
+                }
+                </script>
+            </body>
+    </html>
