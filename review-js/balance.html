@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>钱包余额管理器</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <p>当前余额:<span id="ye">100</span>sol</p>
+    <div class="box">
+        <button onclick="zz10()">转账10</button>
+        <button onclick="zz20()">转账20</button>
+        <button onclick="sk50()">收款50</button>
+        <button onclick="cz()">重置</button>
+    </div>
+    <script>
+        let qb = 100;
+        function zz10() {
+            if (qb >= 10) {
+                qb = qb - 10;
+
+                ty()
+            } else { alert('余额不足 无法转账') };
+        }
+        function zz20() {
+            if (qb >= 20) {
+                qb = qb - 20;
+
+                ty()}
+            else { alert('余额不足 无法转账') }
+        }
+        function sk50() {
+            qb = qb + 50;
+            ty()
+        }
+        function cz() {
+            qb = 100;
+            ty()
+        }
+        function ty() {
+            let display = document.getElementById('ye');
+            display.innerText = qb;
+            if(qb<=0){
+                alert('您的余额不足');
+                display.style.color='red';
+            }else if (qb<30){
+                display.style.color='red';
+            }else{display.style.color='black';}
+          
+        }
+
+    </script>
+</body>
+
+</html>
