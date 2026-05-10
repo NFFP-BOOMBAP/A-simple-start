@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>第九课 状态管理</title>
+        <style>
+            body{
+                background-color:#0f0f1a;
+                color: white;
+                font-family: Arial, sans-serif;
+                padding:40px;
+            }
+            #statusText{
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+            #walletContainer{
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+            .wallet-btn{
+                padding: 12px 24px;
+                border-radius: 30px;
+                border: 3px solid transparent;
+                font-size: 16px;
+                cursor:pointer;
+                color:black;
+                transition: 0.2s;
+            }
+            /*选中状态的样式：边框变白变粗*/
+            .wallet-btn.active{
+                border-color: white;
+                box-shadow: 0 0 15px rgba(255,255,255,0.4);
+                transform: scale(1.05);
+            }
+            </style>
+        </head>
+        <body>
+            <h1>选择你的钱包</h1>
+            <p id="statusText">当前连接：无</p>
+            <div id="walletContainer"></div>
+            <script>
+                //===1.数据：钱包列表===///
+                let walletList=[
+                    {name:'Phantom',color:'#AB9FF2'},
+                    {name:'Backpack',color:'#E33B3B'},
+                    {name:'Solflare',color:'#FF8C42'},
+                    {nama:'Ledger',color:'#FFD700'},
+                    {name:'Torus',color:'#4A90E2'}
+                ];
+                //===2.状态变量：记录当前选中钱包的索引，-1 表示无===//
+                let selectedIndex = -1;
+                ///===3.获取容器===//
+                let container = document.getElementById('walletContainer');
+                //===4.统一渲染函数：根据selectedIndex 刷新整个面板===//
+                function render(){
+                    let statusText=document.getElementById('statusText');
+                    let buttons=document.querySelectorAll('.wallet-btn');
+                    // 更新顶部状态文字
+                    if(selectedIndex === -1){
+                        statusText.innerText='当前连接:无';
+                        document.body.style.backgroundColor='#0f0f1a';
+                    }else{
+                        let wallet = walletList[selectedIndex];
+                        statusText.innerText='当前连接'+wallet.name;
+                        document.body.style.backgroundColor = wallet.color;
+                    }
+                    //更新所有按钮的选中样式
+                    for (let i = 0;i < buttons.length;i++){
+                        if(i === selectedIndex){
+                            buttons[i].classList.add('active');
+                            //加上高亮
+                        }else{
+                            buttons[i].classList.remove('active');
+                            //去掉高亮
+                        }
+                    }
+                }
+                for (let i = 0; i < walletList.length; i++) {
+    let wallet = walletList[i];
+
+    // 创建按钮
+    let btn = document.createElement('button');
+    btn.className = 'wallet-btn';
+    btn.style.backgroundColor = wallet.color;
+    btn.innerText = wallet.name;
+
+    // 绑定点击事件
+    btn.onclick = function() {
+        // 如果点击的是已经选中的按钮 → 取消选中
+        if (selectedIndex === i) {
+            selectedIndex = -1;
+        } else {
+            // 否则选中当前按钮
+            selectedIndex = i;
+        }
+        // 任何点击后都重新渲染页面
+        render();
+    };
+
+    // 把按钮加入容器
+    container.appendChild(btn);
+}
+
+// 初始渲染一次
+render();
+                </script>
+            </body>
+    </html>
