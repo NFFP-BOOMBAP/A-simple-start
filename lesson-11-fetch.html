@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>第十一课:Fetch API</title>
+        <style>
+            body{
+                background-color: #0f0f1a;
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 40px;
+                text-align: center;
+            }
+            .price-card{
+                background-color: #1a1a2e;
+                padding: 40px;
+                border-radius: 20px;
+                display: inline-block;
+                border:2px solid #14F195;
+                min-width: 300px;
+            }
+            #price{
+                font-size: 60px;
+                font-weight: bold;
+                color:#14F195;
+                margin:20px 0;
+            }
+            #status{
+                color:#888;
+                font-size: 14px;
+            }
+            button{
+                background-color: #14F195;
+                color: black;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 30px;
+                font-size: 16px;
+                cursor: pointer;
+                font-weight: bold;
+                margin-top: 20px;
+            }
+            button:hover{
+                background-color: #00cc7a;
+            }
+            .error{
+                color: #FF6B6B;
+            }
+            </style>
+
+        </head>
+        <body>
+            <h1>solana 实时价格</h1>
+
+            <div class="price-card">
+                <h2> SOL/USD</h2>
+                    <div id="price">---</div>
+                    <p id="status">点击下方获取价格</p>
+                    <button onclick="fetchPrice()">刷新价格</button>
+            </div>
+
+            <script>
+                async function fetchPrice() {
+                    // 1 获取页面元素
+                    let priceEl = document.getElementById('price');
+                    let statusEl = document.getElementById('status');
+
+                    // 2 更新状态为“加载中。。。”
+                    statusEl.textContent = '加载中...';
+                    statusEl.className='';
+                    try{
+                        // 3 发起网络请求
+                        let response = await fetch(
+                            'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd'
+                        );
+
+                        // 4 检查响应是否成功
+                        if (!response.ok){
+                            throw new Error('网络请求失败，状态码：'+response.status);
+                        }
+
+                        // 5 把响应解析为 JSON
+                        let data = await response.json();
+
+                        // 6 从JSON里取出sol价格
+                        let solPrice = data.solana.usd;
+
+                        // 7 显示在页面上
+                        priceEl.innerText = '$'+solPrice;
+                        statusEl.innerText = '最后更新：'+new Date().toLocaleTimeString();
+                        statusEl.className='';
+                    }  catch (error){
+                        // 8 出错时显示报错信息
+                        priceEl.innerText = '---';
+                        statusEl.innerText = '获取价格失败：'+error.message;
+                        statusEl.className='error';
+                    }
+                }
+
+                // 页面加载时自动获取一次
+                fetchPrice();
+                </script>
+            </body>
+</html>
