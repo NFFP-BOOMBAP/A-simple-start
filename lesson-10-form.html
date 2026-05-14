@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>第十课：表单与输入处理</title>
+        <style>
+            body{
+                background-color: #0f0f1a;
+                color: white;
+                font-family: Arial,sans-serif;
+                padding: 40px;
+            }
+            .form-group{
+                margin-bottom: 20px;
+            }
+            label{
+                display: block;
+                margin-bottom: 5px;
+                color: #14F195;
+            }
+            input{
+                width: 300px;
+                padding: 10px;
+                border-radius: 10px;
+                border: 2px solid #333;
+                background-color: #1a1a2e;
+                color: white;
+                font-size: 16px;
+            }
+            input:focus{
+                border-color: #14F195;
+                outline: none;
+            }
+            button{
+                background-color: #14F195;
+                color: black;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 30 px;
+                font-size: 16px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+            button:hover{
+                background-color: #00cc7a;
+            }
+            .error{
+                color: #FF6B6B;
+                font-size: 14px;
+            }
+            #history{
+                margin-top: 30px;
+            }
+            .tx-record{
+                background-color: #1a1a2e;
+                padding: 10px 15px;
+                border-radius: 10px;
+                margin-bottom: 5px;
+                border-left: 3px solid #14F195;
+            }
+            </style>
+        </head>
+        <body>
+            <h1>token 转账</h1>
+
+                <form onsubmit="sendToken();return false">
+                    <div class="form-group">
+                        <label>接收地址：</label>
+                        <input id="addressInput" type="text" placeholder="输入 solana 地址...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>转账金额：</label>
+                            <input id="amountInput" type="number" placeholder="输入金额..." min="0" step="0.01">
+                            </div>
+
+                            <p id="errorMsg" class="error"></p>
+                            <button type="submit">确认转账</button>
+                            </form>
+
+                            <div id="history">
+                                <h2>转账记录</h2>
+                                <div id="historyList"></div>
+                                </div>
+
+                                <script>
+                                    // 用数组存储转账记录
+                                    let transactions=[];
+
+                                    function sendToken(){
+                                        // 1 获取输入值
+                                        let address = document.getElementById('addressInput').value;
+                                        let amountStr = document.getElementById('amountInput').value;
+                                        let errorEl = document.getElementById('errorMsg');
+
+                                        // 2 清理之前的错误提示 
+                                        errorEl.innerText='';
+
+                                        // 3 验证：地址不能为空
+                                        if (address.trim()=== ''){
+                                            errorEl.innerText='请输入接收地址';
+                                            return; // 终止函数
+                                        }
+
+                                        // 4 验证：金额不能为零
+                                        if (amountStr.trim()===''){
+                                            errorEl.innerText='请输入转帐金额';
+                                            return;
+                                        }
+
+                                        // 5 转账金额为数字
+                                        let amount = parseFloat(amountStr);
+
+                                        // 6 验证：是否是合法数字
+                                        if (isNaN(amount)){
+                                            errorEl.innerText='金额必须是数字';
+                                            return;
+                                        }
+
+                                        // 7 验证：金额必须大于0
+                                        if (amount<=0){
+                                            errorEl.innerText='金额必须大于0';
+                                            return;
+                                        }
+
+                                        // 8 模拟转账成功
+                                        let tx = {
+                                            address:address,
+                                            amount:amount,
+                                            time: new Date().toLocaleTimeString()
+                                        };
+
+                                        // 9 存入数组
+                                        transactions.push(tx);
+
+                                        // 10 清空输入框
+                                        document.getElementById('addressInput').value='';
+                                        document.getElementById('amountInput').value='';
+
+                                        // 11 刷新历史记录
+                                        renderHistory();
+
+                                        // 12 提示成功
+                                        alert('转账成功！发送' + amount +'sol到'+address);
+                                        }
+                                        function renderHistory(){
+                                            let container = document.getElementById('historyList');
+                                            container.innerHTML=''; // 清空
+
+                                            for (let i = 0;i < transactions.length;i++){
+                                                let tx = transactions[i];
+
+                                                let div = document.createElement('div');
+                                                div.className = 'tx-record';
+                                                div.innerHTML = '发送'+tx.amount+'sol'+tx.address+'('+tx.time+')';
+
+                                                container.appendChild(div);
+                                            }
+                                        }
+
+                                    </script>
+            </body>
+    </html>
